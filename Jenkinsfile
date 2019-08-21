@@ -18,13 +18,13 @@ pipeline {
        
        stage(" copy project specific tar to remote host") {
          steps{
-                sh """ cp -r myproj.${params.ENV}.tar.gz ~/ """
+                sh """ cp -r myproj.${params.ENV}.tar.gz ~/builds """
              
          }
        }
        stage(" untar project specific tar to remote host") {
          steps{
-                sh """ tar -xvf ~/myproj.${params.ENV}.tar.gz -C ~/projects """
+                sh """ tar -xvf ~/builds/myproj.${params.ENV}.tar.gz -C ~/projects """
              
          }
        }
