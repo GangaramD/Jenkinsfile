@@ -1,21 +1,35 @@
 pipeline {
     agent any
 
-    /*parameters {
-        string(name: 'name' , defaultValue: "", description: 'name')
+    parameters {
+        string(name: 'ENV' , defaultValue: "", description: 'ENV')
+        string(name: 'project' , defaultValue: "", description: 'project')
 
-    }*/
+    }
 
     stages {
        
        stage(" creating project specific tar") {
          steps{
-                sh 'sbt assembly'
+                sh """./casenew.sh ${params.ENV} ${params.project}""" 
              
          }
        }
        
-       stage(" creating a scala jar") {
+       stage(" copy project specific tar to remote host") {
+         steps{
+                sh """ cp -r myproj.${params.ENV}.tar.gz ~/ """
+             
+         }
+       }
+       stage(" untar project specific tar to remote host") {
+         steps{
+                sh """ tar -xvf ~/myproj.${params.ENV}.tar.gz -C ~/projects """
+             
+         }
+       }
+       
+       /*stage(" creating a scala jar") {
          steps{
                 sh 'sbt assembly'
              
@@ -41,6 +55,6 @@ pipeline {
             sh 'ssh user@server java -jar /deploy/artifact/mcd.jar'
 
         }
-      }
+      }*/
     }
 }
