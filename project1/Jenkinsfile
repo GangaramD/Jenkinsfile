@@ -6,8 +6,8 @@ pipeline {
     stage("Check the above jobs") {
       steps {
           FanInReverseBuildTrigger {
-            upstreamProjects: 'pipeline,test2',
-            watchUpstreamRecursively: true,
+            upstreamProjects: 'pipeline,test2'
+            watchUpstreamRecursively: true
             threshold: 'STABLE'
              }
            }
