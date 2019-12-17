@@ -20,4 +20,5 @@ export filename=$filename
 echo "$filename"
 
 echo "Create a backup of old artifact"
-tar -cvf `date`-CropInMVC.tar 
+old_date=$(date +%Y-%m-%d)
+tar -cvf $old_date-CropInMVC.tar 
