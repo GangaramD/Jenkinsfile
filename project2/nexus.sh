@@ -14,7 +14,7 @@ groupid=$sourcerepofolder/$date/products/webservices
 artifactid=$name
 
 echo "Script to donwload artifacts from the nexus repo"
-echo "wget --user=$user --password=$password http://$nexusrepourl/repository/$Repo_name/$groupid/$artifactid/$version/$filename.msi"	
+wget --user=$user --password=$password http://$nexusrepourl/repository/$Repo_name/$groupid/$artifactid/$version/$filename.msi	
 
 export filename=$filename
 echo "$filename"
