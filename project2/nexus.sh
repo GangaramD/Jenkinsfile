@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e
+set -ex
 user=$nexususer
 password=$pass
 repo_url="$nexusrepo"    #nexus repo url
