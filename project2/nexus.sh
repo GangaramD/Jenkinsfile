@@ -18,3 +18,6 @@ wget --user=$user --password=$password http://$nexusrepourl/repository/$Repo_nam
 
 export filename=$filename
 echo "$filename"
+
+echo "Create a backup of old artifact"
+tar -cvf `date`-CropInMVC.tar 
