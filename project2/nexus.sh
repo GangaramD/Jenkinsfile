@@ -22,6 +22,6 @@ echo "$filename"
 cp $filename.msi /c/WebSites/dev2/CropInMVC/
 echo "Create a backup of old artifact"
 old_date=$(date +%Y-%m-%d)
-tar -cvf $old_date-CropInMVC.tar /c/WebSites/dev2/CropInMVC/
+tar -cvf $old_date-CropInMVC.tar -C /c/WebSites/dev2/CropInMVC/ .
 cp -r $old_date-CropInMVC.tar /c/backup/
 
