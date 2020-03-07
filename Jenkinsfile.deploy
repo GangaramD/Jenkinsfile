@@ -1,0 +1,23 @@
+pipeline {
+
+agent any
+
+ parameters { 
+        string(name: 'image_tag' , defaultValue: "", description: 'Enter the image_tag')
+        //string(name: 'Environment' , defaultValue: "", description: 'Enter the Environment')
+        choice(name: 'Environment', choices: ['development', 'production', 'test'], description: 'Enter the Environment')
+        //choice(name: 'Application', choices: ['home-mgmt', 'data-mgmt', 'client'], description: 'Select application to replace')
+        
+    }
+
+stages {
+
+stage('Deployment to $env k8s cluster') {
+
+steps {
+      buildName "${params.image_tag}"
+      sh "ansible-playbook -i ansible/inventory/${params.Environment}/ ansible/deploy/${params.Environment}/${env.JOB_BASE_NAME}/deploy.yml --vault-password-file /var/lib/jenkins/secrets/vault-pass --extra-vars 'env=${params.Environment} image_tag=${params.image_tag} ws=$WORKSPACE'"
+    }
+   }
+ }
+}
